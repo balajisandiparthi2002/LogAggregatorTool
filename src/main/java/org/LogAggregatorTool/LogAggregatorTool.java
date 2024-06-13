@@ -1,41 +1,40 @@
 package org.LogAggregatorTool;
 
 import org.LogAggregatorTool.operations.LogFilesExecutor;
-import org.LogAggregatorTool.utility.Constants;
+import org.LogAggregatorTool.constants.LogAggregatorConstants;
+
 import java.io.File;
 import java.util.Scanner;
 
 public class LogAggregatorTool {
 
-    public static void main(String[] args){
-        System.out.println(Constants.WELCOME_MESSAGE);
+    public static void main(String[] args) {
+        System.out.println(LogAggregatorConstants.WELCOME_MESSAGE);
         Scanner inputScanner = new Scanner(System.in);
-        System.out.println(Constants.NEW_LINE + Constants.ENTER_PATH_MESSAGE);
+        System.out.println(LogAggregatorConstants.NEW_LINE_CHAR + LogAggregatorConstants.ENTER_PATH_MESSAGE);
         // Taking the user input.
-        String pathToLogFilesFolder=inputScanner.next();
-        File fileObjectOfPathToFolder=new File(pathToLogFilesFolder);
+        String pathToLogFilesFolder = inputScanner.next();
+        File logFilesFolder = new File(pathToLogFilesFolder);
         // if the path provided by the user is not valid, it iterates until they enter a valid path.
-        while(!fileObjectOfPathToFolder.exists()){
-            System.out.println(Constants.PATH_DOES_NOT_EXIST_MESSAGE);
-            pathToLogFilesFolder=inputScanner.next();
-            if(pathToLogFilesFolder.equals("e")){
-                System.out.println(Constants.EXIT_MESSAGE);
+        while (!logFilesFolder.exists()) {
+            System.out.println(LogAggregatorConstants.PATH_DOES_NOT_EXIST_MESSAGE);
+            pathToLogFilesFolder = inputScanner.next();
+            if (pathToLogFilesFolder.equals(LogAggregatorConstants.TO_EXIT)) {
+                System.out.println(LogAggregatorConstants.EXIT_MESSAGE);
                 return;
             }
-            fileObjectOfPathToFolder=new File(pathToLogFilesFolder);
+            logFilesFolder = new File(pathToLogFilesFolder);
         }
-        System.out.println(Constants.ENTER_OUTPUT_FILE_PATH);
-        String outputFilePath=inputScanner.next();
-        System.out.println(Constants.PROCESSING_MESSAGE);
-        LogFilesExecutor logFilesExecutor=new LogFilesExecutor();
-        String overallResult = logFilesExecutor.executeLogFiles(pathToLogFilesFolder,outputFilePath);
-        if(overallResult.equals(Constants.SUCCESS)){
-            System.out.println(Constants.NEW_LINE + "Success!!!All the files are merged");
-            System.out.println("The location of the output file is : " + outputFilePath);
+        System.out.println(LogAggregatorConstants.ENTER_OUTPUT_FILE_PATH);
+        String outputFilePath = inputScanner.next();
+        System.out.println(LogAggregatorConstants.PROCESSING_MESSAGE);
+        LogFilesExecutor logFilesExecutor = new LogFilesExecutor();
+        boolean overallResult = logFilesExecutor.executeLogFiles(pathToLogFilesFolder, outputFilePath);
+        if (overallResult) {
+            System.out.println(LogAggregatorConstants.NEW_LINE_CHAR + LogAggregatorConstants.SUCCESS_MESSAGE + outputFilePath);
+        } else {
+            System.out.println(LogAggregatorConstants.FAILURE);
         }
-        else{
-            System.out.println("Failure : " + overallResult);
-        }
-        System.out.println(Constants.NEW_LINE + Constants.THANK_YOU_MESSAGE);
+        System.out.println(LogAggregatorConstants.NEW_LINE_CHAR + LogAggregatorConstants.THANK_YOU_MESSAGE);
     }
 }

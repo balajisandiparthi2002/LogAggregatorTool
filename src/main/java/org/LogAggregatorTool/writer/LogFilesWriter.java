@@ -1,6 +1,6 @@
 package org.LogAggregatorTool.writer;
 
-import org.LogAggregatorTool.utility.Constants;
+import org.LogAggregatorTool.constants.LogAggregatorConstants;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,19 +9,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LogFilesWriter {
+    /**
+     * This method writes the final merged and sorted data into the output file.
+     *
+     * @param sortedTimestampsList    it is a list containing the timestamps in sorted order.
+     * @param outputFilePath    it is the location of the output file where the data is to be written.
+     * @param timestampToLogStatementMap    it is a map containing the timestamps as keys and records as values.
+     * @throws IOException    it throws IOException if there is any IOException while writing to the file.
+     */
     public void writeToOutputFile(ArrayList<String> sortedTimestampsList, String outputFilePath, HashMap<String, ArrayList<String>> timestampToLogStatementMap) throws IOException {
-        BufferedWriter outputFile = new BufferedWriter(new FileWriter(outputFilePath));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFilePath));
         for (String timestamp : sortedTimestampsList) {
             for (String record : timestampToLogStatementMap.get(timestamp)) {
-                StringBuilder currentData = new StringBuilder(Constants.EMPTY_STRING);
+                StringBuilder currentData = new StringBuilder(LogAggregatorConstants.EMPTY_STRING);
                 currentData.append(timestamp);
-                currentData.append(Constants.SPACE);
+                currentData.append(LogAggregatorConstants.SPACE);
                 currentData.append(record);
-                currentData.append(Constants.NEW_LINE);
+                currentData.append(LogAggregatorConstants.NEW_LINE_CHAR);
                 //writing to the output file.
-                outputFile.write(currentData.toString());
+                bufferedWriter.write(currentData.toString());
             }
         }
-        outputFile.close();
+        bufferedWriter.close();
     }
 }
