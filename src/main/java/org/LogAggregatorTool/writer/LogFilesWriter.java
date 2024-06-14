@@ -1,7 +1,6 @@
 package org.LogAggregatorTool.writer;
 
 import org.LogAggregatorTool.constants.LogAggregatorConstants;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class LogFilesWriter {
      *
      * @param sortedTimestampsList    it is a list containing the timestamps in sorted order.
      * @param outputFilePath    it is the location of the output file where the data is to be written.
-     * @param timestampToLogStatementMap    it is a map containing the timestamps as keys and records as values.
+     * @param timestampToLogStatementMap    Map of log files data, Key : timestamp, Value : whole record.
      * @throws IOException    it throws IOException if there is any IOException while writing to the file.
      */
     public void writeToOutputFile(ArrayList<String> sortedTimestampsList, String outputFilePath, HashMap<String, ArrayList<String>> timestampToLogStatementMap) throws IOException {

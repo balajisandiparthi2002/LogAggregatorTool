@@ -2,7 +2,6 @@ package org.LogAggregatorTool.reader;
 
 import org.LogAggregatorTool.constants.LogAggregatorConstants;
 import org.LogAggregatorTool.validator.LogAggregatorValidator;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,8 +15,8 @@ public class LogFilesReader {
      * It checks for different validations and if they are not valid, the flow of the program returns from there.
      *
      * @param pathToLogFilesFolder    it is the path to the folder where logfiles are located.
-     * @param timestampToLogStatementMap    it is a map which stores timestamps as keys and records as values.
-     * @return    if there are no errors, it returns Success.Otherwise, it returns the error message.
+     * @param timestampToLogStatementMap    Map of log files data, Key : timestamp, Value : whole record.
+     * @return if there are no errors, it returns Success.Otherwise, it returns the error message.
      */
     public boolean readLogFiles(String pathToLogFilesFolder, HashMap<String, ArrayList<String>> timestampToLogStatementMap) {
         File logFilesFolder = new File(pathToLogFilesFolder);
@@ -31,7 +30,7 @@ public class LogFilesReader {
                 System.out.println((logFilesFolder + LogAggregatorConstants.BACK_SLASH + logFileName) + LogAggregatorConstants.INVALID_FILE);
                 return false;
             }
-            if (!pathValidator.checkEndsWith(logFileName)) {
+            if (!pathValidator.endsWith(logFileName)) {
                 System.out.println(logFileName + LogAggregatorConstants.INVALID_FILE_FORMAT);
                 return false;
             }
@@ -46,7 +45,7 @@ public class LogFilesReader {
                 while (currentLineInLogFile != null) {
                     if (currentLineInLogFile.length() >= LogAggregatorConstants.LENGTH_OF_DATE) {
                         //checking timestamp for separating the records based on timestamp.
-                        String currentDate = currentLineInLogFile.substring(LogAggregatorConstants.ZERO, LogAggregatorConstants.LENGTH_OF_DATE);
+                        String currentDate = currentLineInLogFile.substring(LogAggregatorConstants.DEFAULT_INT_VALUE, LogAggregatorConstants.LENGTH_OF_DATE);
                         //matching the regex expression for the date format
                         if (currentDate.matches(LogAggregatorConstants.REGEX_TO_MATCH_DATE_FORMAT)) {
                             if (!isFirstRecord) {
@@ -57,7 +56,7 @@ public class LogFilesReader {
                                 timestampToLogStatementMap.get(currentTimestamp).add(currentRecord.toString());
                             }
                             //taking the whole timestamp as the key.
-                            currentTimestamp = currentLineInLogFile.substring(LogAggregatorConstants.ZERO, LogAggregatorConstants.LENGTH_OF_TIMESTAMP);
+                            currentTimestamp = currentLineInLogFile.substring(LogAggregatorConstants.DEFAULT_INT_VALUE, LogAggregatorConstants.LENGTH_OF_TIMESTAMP);
                             isFirstRecord = false;
                             currentRecord = new StringBuilder(currentLineInLogFile.substring(LogAggregatorConstants.LENGTH_OF_TIMESTAMP));
                         } else {
@@ -72,8 +71,8 @@ public class LogFilesReader {
                     timestampToLogStatementMap.put(currentTimestamp, new ArrayList<>());
                 }
                 timestampToLogStatementMap.get(currentTimestamp).add(currentRecord.toString());
-            } catch (IOException exception) {
-                System.out.println(LogAggregatorConstants.IO_EXCEPTION_MESSAGE + exception);
+            } catch (IOException ioException) {
+                System.out.println(LogAggregatorConstants.IO_EXCEPTION_MESSAGE + ioException);
             }
         }
         return true;

@@ -2,6 +2,9 @@ package org.LogAggregatorTool.operations;
 
 import java.util.concurrent.Callable;
 
+/**
+ * This is an interface to create the instance of ThreadCreation to create a new thread.
+ */
 interface ThreadCreationInterface extends Callable<String> {
     String call();
 }
