@@ -37,5 +37,4 @@ public class LogAggregatorConstants {
     public static String TO_EXIT = "e";
     public static String USER_EXIT_MESSAGE = "User has chosen to exit.";
     public static String WELCOME_MESSAGE = "Welcome to Log Aggregator Tool\nNote : Ensure that all the paths you provide are valid.";
-    public static int ZERO = 0;
 }
