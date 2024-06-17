@@ -16,9 +16,9 @@ public class LogAggregatorConstants {
     public static String INVALID_DIRECTORY = "Invalid Directory.";
     public static String INVALID_DIRECTORY_MESSAGE = " is not a path to a folder.";
     public static String INVALID_FILE = "Invalid file.";
-    public static String INVALID_FILE_MESSAGE = " is not a file. Provided input path contains folder.";
     public static String INVALID_FILE_FORMAT = "Invalid file format.";
     public static String INVALID_FILE_FORMAT_MESSAGE = " file is in wrong Format.";
+    public static String INVALID_FILE_MESSAGE = " is not a file. Provided input path contains folder.";
     public static String INVALID_PATH = "\nInvalid! Path does not exist.\nPlease try again or enter e to exit : ";
     public static String IO_EXCEPTION_MESSAGE = "Input Output Exception : ";
     public static int LENGTH_OF_DATE = 10;
