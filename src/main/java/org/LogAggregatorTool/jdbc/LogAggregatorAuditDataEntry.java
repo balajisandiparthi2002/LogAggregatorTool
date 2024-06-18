@@ -29,6 +29,7 @@ public class LogAggregatorAuditDataEntry {
             auditPreparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
             System.out.println(LogAggregatorConstants.DATABASE_ERROR + sqlException.getMessage());
+            sqlException.printStackTrace();
         }
     }
 }

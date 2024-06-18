@@ -4,7 +4,8 @@ public class LogAggregatorConstants {
     public static String BACK_SLASH = "\\";
     public static String COMA = ",";
     public static String DATABASE_ERROR = "Database Error.";
-    public static String DATE_FORMAT = "yyyy/MM/dd HH:mm:ss:SSS";
+    public static String DATE_FORMAT_MM_DD_YYYY = "MM/dd/yyyy HH:mm:ss.SSS";
+    public static String DATE_FORMAT_YYYY_MM_DD = "yyyy/MM/dd HH:mm:ss:SSS";
     public static int DEFAULT_INT_VALUE = 0;
     public static String EMPTY_STRING = "";
     public static String ENTER_OUTPUT_FILE_PATH = "\nPlease enter a path to store output file : ";
@@ -24,7 +25,6 @@ public class LogAggregatorConstants {
     public static int LENGTH_OF_DATE = 10;
     public static int LENGTH_OF_TIMESTAMP = 23;
     public static String LOG_FILE_EXTENSION = ".log";
-    public static String NEW_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss.SSS";
     public static String NEW_LINE_CHAR = "\n";
     public static String PROCESSING_MESSAGE = "Processing...";
     public static String REGEX_TO_MATCH_DATE_FORMAT = "[1-9][0-9][0-9]{2}/(0[1-9]|1[0-2])/([1-2][0-9]|0[1-9]|3[0-1])";

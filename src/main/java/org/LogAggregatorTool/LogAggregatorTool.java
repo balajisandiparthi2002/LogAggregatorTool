@@ -16,14 +16,14 @@ public class LogAggregatorTool {
         System.out.println(LogAggregatorConstants.NEW_LINE_CHAR + LogAggregatorConstants.ENTER_PATH_MESSAGE);
         // Taking the user input.
         LocalDateTime currentDateTime;
-        String pathToLogFilesFolder = inputScanner.next();
+        String pathToLogFilesFolder = inputScanner.nextLine();
         File logFilesFolder = new File(pathToLogFilesFolder);
         LogAggregatorAuditData logAggregatorAuditData=new LogAggregatorAuditData();
         LogAggregatorAuditDataEntry logAggregatorAuditDataEntry=new LogAggregatorAuditDataEntry();
         // if the path provided by the user is not valid, it iterates until they enter a valid path.
         while (!logFilesFolder.exists()) {
             System.out.println(LogAggregatorConstants.INVALID_PATH);
-            pathToLogFilesFolder = inputScanner.next();
+            pathToLogFilesFolder = inputScanner.nextLine();
             if (pathToLogFilesFolder.equals(LogAggregatorConstants.TO_EXIT)) {
                 logAggregatorAuditData.setResult(LogAggregatorConstants.FAILURE);
                 logAggregatorAuditData.setErrorMessage(LogAggregatorConstants.USER_EXIT_MESSAGE);
@@ -39,7 +39,7 @@ public class LogAggregatorTool {
             logFilesFolder = new File(pathToLogFilesFolder);
         }
         System.out.println(LogAggregatorConstants.ENTER_OUTPUT_FILE_PATH);
-        String outputFilePath = inputScanner.next();
+        String outputFilePath = inputScanner.nextLine();
         System.out.println(LogAggregatorConstants.NEW_LINE_CHAR + LogAggregatorConstants.PROCESSING_MESSAGE);
         logAggregatorAuditData.setPathToTheFolder(pathToLogFilesFolder);
         logAggregatorAuditData.setNamesOfLogFiles(LogAggregatorConstants.EMPTY_STRING);

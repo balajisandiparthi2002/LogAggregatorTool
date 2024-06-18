@@ -7,7 +7,6 @@ import java.io.File;
  * This class validates the files and directory based on the requirements.
  */
 public class LogAggregatorValidator {
-
     public boolean isDirectory(File logFilesFolder) {
         return logFilesFolder.isDirectory();
     }

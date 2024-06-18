@@ -10,4 +10,3 @@ create table audit (
     output_file_name varchar(50),
     error_message varchar(100)
 );
-	

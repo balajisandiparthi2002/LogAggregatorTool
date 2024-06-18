@@ -1,7 +1,6 @@
 package org.LogAggregatorTool.operations;
 
 import org.LogAggregatorTool.constants.LogAggregatorConstants;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -15,17 +14,20 @@ import java.util.Date;
  */
 public class TimestampSorter {
     private static final List<SimpleDateFormat> DATE_FORMATS = Arrays.asList(
-            new SimpleDateFormat(LogAggregatorConstants.DATE_FORMAT),
-            new SimpleDateFormat(LogAggregatorConstants.NEW_DATE_FORMAT)
+            new SimpleDateFormat(LogAggregatorConstants.DATE_FORMAT_YYYY_MM_DD),
+            new SimpleDateFormat(LogAggregatorConstants.DATE_FORMAT_MM_DD_YYYY)
     );
 
     private static Date parseDate(String dateString) {
-        for (SimpleDateFormat dateFormat : DATE_FORMATS) {
-            try {
-                return dateFormat.parse(dateString);
-            } catch (ParseException parseException) {
-                //parseException iterates for every mismatch.So, not printing anything.
+        try{
+            if(dateString.indexOf("/")==2){
+                return DATE_FORMATS.get(1).parse(dateString);
             }
+            else{
+                return DATE_FORMATS.get(0).parse(dateString);
+            }
+        }catch(ParseException parseException){
+            System.out.println(parseException.getMessage());
         }
         return new Date(LogAggregatorConstants.DEFAULT_INT_VALUE);
     }
